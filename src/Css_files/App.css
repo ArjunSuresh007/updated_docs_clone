@@ -1,0 +1,41 @@
+:root{
+    margin: 0px;
+    box-shadow: border-box;
+    overflow: hidden;
+}
+
+.App{
+    width: 99.6vw;
+    height: 99vh;
+    display: grid;
+    grid-template-areas: 
+     "a a a c "
+     "b b b c "
+     "b b b c "
+     "b b b c "
+    ;
+    grid-gap: 5px 5px;
+}
+
+.header{
+    grid-area:a;
+    width: 99%;
+    height: 15vh;
+}
+.editor{
+    grid-area:b;
+    height:84.7vh ;
+    width: 94vw;
+}
+.sidebar{
+    grid-area:c;
+    height:100% ;
+    width: 3vw;
+    border-left: 2px solid #cccccc;
+}
+
+/* @media only screen and (max-width:500px){
+    .sidebar{
+        width: 30vw;
+    }
+} */

@@ -1,0 +1,39 @@
+.main-editor{
+    width: 70.5%;
+    height: 95.8%;
+    resize: none;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-style: italic;
+    font-weight: lighter;
+    font-size: large;
+    border: transparent;    
+    background-color: white;
+    margin: 1.25% 13%;
+}
+
+.main-editor:focus{
+    outline:none;
+}
+
+#text-editor{
+    border: 2px solid black;
+    height:99%;
+    width: 100%;
+    background-color: gray;
+}
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+   
+  ::-webkit-scrollbar-thumb {
+    background: #cccccc; 
+    border-radius: 5px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }
