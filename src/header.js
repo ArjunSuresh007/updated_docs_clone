@@ -1,11 +1,11 @@
-import {useState,useRef} from 'react'
+import {useRef} from 'react'
 import {IoDocumentTextSharp} from 'react-icons/io5'
 import {AiOutlineStar,AiOutlineCloudDownload,AiOutlineFolderAdd,AiOutlinePlusCircle,AiOutlineMinusCircle} from 'react-icons/ai'
 import {GrUndo,GrRedo,GrBold,GrItalic,GrUnderline,GrTextAlignCenter,GrTextAlignLeft,GrTextAlignRight} from 'react-icons/gr'
 import {HiOutlineSave,HiOutlineLockClosed} from 'react-icons/hi'
 import {MdOutlineMessage} from 'react-icons/md'
 import {BsClockHistory} from 'react-icons/bs'
-import {RxDividerVertical as RxDividerVertical} from 'react-icons/rx'
+import {RxDividerVertical} from 'react-icons/rx'
 import {SiGooglemeet} from 'react-icons/si'
 import {BiImageAdd,BiLeftIndent,BiRightIndent} from 'react-icons/bi'
 import {saveAs} from 'file-saver'
@@ -45,20 +45,30 @@ export default function Headers(){
     }
 
     function undoHandler(){
-        if (undoRef.current.size > 1 && (undoRef.current.getByIndex(undoRef.current.size - (2+count)))){
+        if (undoRef.current.size > 1 && (undoRef.current.getByIndex(undoRef.current.size - (2+count))!== undefined)){
             editor.value = undoRef.current.getByIndex(undoRef.current.size - (2+count))
             count += 1
         }else{
-            console.log(null)
+            count = undoRef.current.size - 2
+            editor.value = undoRef.current.getByIndex(undoRef.current.size - (2+count))
         }
     }
     function redoHandler(){
-        if (undoRef.current.size > 1 && (undoRef.current.getByIndex(undoRef.current.size - (2+count)) != undefined) ){
+        if (undoRef.current.size > 1 && undoRef.current.getByIndex(undoRef.current.size - (2+count)) !== undefined && (count > 0 && count <= undoRef.current.size - 2)){
             editor.value = undoRef.current.getByIndex(undoRef.current.size - (2+count))
+            // console.log(undoRef.current.getByIndex(undoRef.current.size - (2+count)))
+            // console.log(undoRef.current)
+            // console.log(count)
             count -= 1
-        }else{
-            console.log(null)
+        }else if(count === 0){
+            count = 0
+            editor.value = undoRef.current.getByIndex(undoRef.current.size - (2+count))
         }
+        // else{
+        //     count = undoRef.current.size - 2
+        //     // editor.value = undoRef.current.getByIndex(undoRef.current.size - (count))
+        //     console.log(count)
+        // }
     }
 
     function alignHandler(param){
@@ -71,7 +81,7 @@ export default function Headers(){
             editor.style.fontWeight = param
             break
             case 'italic':
-            editor.style.textStyle = param
+            editor.style.fontStyle = 'italic'
             break
             case 'underline':
             editor.style.textDecoration = param
@@ -79,7 +89,7 @@ export default function Headers(){
             case 'normal':
             editor.style.fontWeight = 'normal'
             editor.style.textDecoration = 'none'
-            editor.style.textStyle = 'none'
+            editor.style.fontStyle = 'normal'
             break
             default:
             break
